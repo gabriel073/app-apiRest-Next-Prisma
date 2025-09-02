@@ -6,7 +6,7 @@ const petRest = async () => {
     try {
         const response = await fetch('https://fakestoreapi.com/products/');
         const data = await response.json();
-        await new Promise(resolve => setTimeout(resolve, 4000)); // Simulate a delay
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate a delay
 
         return data;
 
