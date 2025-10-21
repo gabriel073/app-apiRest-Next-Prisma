@@ -2,7 +2,7 @@ import Ingresar from '@/app/ingresar/page';
 import React from 'react'
 
 const CargarUnPost = async (id) => {
-    const respuesta = await fetch(`http://localhost:3000/api/posts/${id}`)
+    const respuesta = await fetch(`${baseUrl}/api/posts/${id}`);
     const data = await respuesta.json()
     return data;
 }
