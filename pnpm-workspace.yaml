@@ -1,0 +1,11 @@
+ignoredBuiltDependencies:
+  - '@pnpm/exe'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - '@tailwindcss/oxide'
+  - bcrypt
+  - prisma
+  - sharp
+  - unrs-resolver
+
+minimumReleaseAge: 2800

@@ -4,17 +4,19 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@pnpm/exe": "^10.17.1",
     "@prisma/client": "^6.14.0",
     "bcrypt": "^6.0.0",
     "next": "15.4.7",
     "next-auth": "^4.24.11",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.63.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

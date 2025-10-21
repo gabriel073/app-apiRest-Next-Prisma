@@ -7,14 +7,13 @@ const Login = () => {
     const recogerForm = async (e) => {
         e.preventDefault()
         const respuesta = await signIn('credentials', {
-            redirect: false,
             usuario: e.target.usuario.value,
             // mail: e.target.mail.value,
             password: e.target.password.value
         });
-        if (!respuesta.ok) {
+        if (respuesta.error) {
             alert("Usuario o contraseña incorrectos");
-            return;
+
         } else {
             router.push("/posts")
         }

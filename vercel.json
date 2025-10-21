@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "src": ".",
+      "use": "@vercel/next",
+      "name": "login-app"
+    }
+  ],
+  "routes": []
+}

@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React from 'react'
-import Logout from '../logout/page';
+const { signOut } = require("next-auth/react")
 
 
 const cargarPosts = async () => {
-    const respuesta = await fetch('http://localhost:3000/api/posts')
+    const respuesta = await fetch('http://localhost:3000/posts');
     const data = await respuesta.json()
     return data;
 }
@@ -25,14 +25,12 @@ const Posts = async () => {
                         </Link>
                     );
                 })}
-                <li className=" bg-red-500 hover:bg-red-300 p-5 rounded-lg shadow-lg w-1/2">
-                    <Logout />
-                </li>
+                <div className=" bg-red-500 hover:bg-red-300 p-5 rounded-lg shadow-lg w-1/2">
+                    <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => signOut()}>Cerrar Sesion</button>
+                </div>
             </ul>
         </div>
-
     )
-
 }
 
 export default Posts;

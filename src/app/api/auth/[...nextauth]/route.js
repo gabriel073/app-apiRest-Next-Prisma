@@ -18,19 +18,21 @@ const handler = NextAuth({
                     type: "password",
                 },
             },
-            async authorize(credentials) {
+            async authorize(credentials, req) {
                 const usuario = await prisma.usuario.findUnique({
                     where: {
                         usuario: credentials.usuario
                     }
                 });
-                if (!usuario) {
-                    return null
-                }
+                if (!usuario) throw new Error("No existe el usuario")
+
                 const passwordMatch = await bcrypt.compare(credentials.password, usuario.password)
-                if (!passwordMatch) {
-                    return null
-                }
+                if (!passwordMatch) throw new Error(
+                    {
+                        message: "Contraseña incorrecta",
+                        ok: false
+                    });
+
                 return {
                     id: usuario.id,
                     usuario: usuario.usuario,
