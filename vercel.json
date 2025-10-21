@@ -3,8 +3,7 @@
   "builds": [
     {
       "src": ".",
-      "use": "@vercel/next",
-      "name": "login-app"
+      "use": "@vercel/next"
     }
   ],
   "routes": []
