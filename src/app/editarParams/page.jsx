@@ -1,6 +1,10 @@
 "use client";
+import { Suspense } from 'react'
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+
+
+export const dynamic = 'force-dynamic'; // <- evita prerender
 
 function EditarParams() {
     const router = useRouter();
@@ -41,7 +45,7 @@ function EditarParams() {
     }
 
     return (
-        <>
+        <Suspense fallback={<>Cargando...</>}>
             <h1 className="text-2xl font-bold m-5 text-center">Editar Post</h1>
             <div className="flex flex-col items-center justify-center">
                 <form className="p-5 bg-red-700 rounded-lg shadow-lg w-1/4 m-auto" onSubmit={handlerForm}>
@@ -67,7 +71,7 @@ function EditarParams() {
 
                 </form>
             </div>
-        </>
+        </Suspense>
     )
 }
 
