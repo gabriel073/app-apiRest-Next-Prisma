@@ -1,54 +1,50 @@
 "use client";
-import { Suspense } from 'react'
-import { useRouter } from 'next/navigation';
-import { useSearchParams } from 'next/navigation';
+import { Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 
-
-export const dynamic = 'force-dynamic'; // <- evita prerender
+function EditarParamsWrapper() {
+    return (
+        <Suspense fallback={<>Cargando...</>}>
+            <EditarParams />
+        </Suspense>
+    );
+}
 
 function EditarParams() {
     const router = useRouter();
     const params = useSearchParams();
 
-    const paramsId = params.get('id');
-    const paramsTitulo = params.get('titulo');
-    const paramsContenido = params.get('contenido');
-
+    const paramsId = params.get("id");
+    const paramsTitulo = params.get("titulo");
+    const paramsContenido = params.get("contenido");
 
     const handlerForm = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         const titulo = e.target.titulo.value;
         const contenido = e.target.contenido.value;
 
-        if (titulo === "" || contenido === "") {
-            return
-        }
+        if (titulo === "" || contenido === "") return;
 
         try {
-            const respuesta = await fetch(`/api/posts/${paramsId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    titulo,
-                    contenido
-                }),
+            await fetch(`/api/posts/${paramsId}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ titulo, contenido }),
             });
-            const datos = await respuesta.json();
-            router.push("/posts")
+            router.push("/posts");
         } catch (error) {
-            console.error("Error:", error)
+            console.error("Error:", error);
         }
-        return;
-
-    }
+    };
 
     return (
-        <Suspense fallback={<>Cargando...</>}>
+        <>
             <h1 className="text-2xl font-bold m-5 text-center">Editar Post</h1>
             <div className="flex flex-col items-center justify-center">
-                <form className="p-5 bg-red-700 rounded-lg shadow-lg w-1/4 m-auto" onSubmit={handlerForm}>
+                <form
+                    className="p-5 bg-red-700 rounded-lg shadow-lg w-1/4 m-auto"
+                    onSubmit={handlerForm}
+                >
                     <input
                         type="text"
                         placeholder="Titulo del Post"
@@ -65,14 +61,13 @@ function EditarParams() {
                     />
                     <input
                         type="submit"
-                        className="p-2 rounded-xl bg-red-500 text-white hover:bg-red-400 border-2 border-gray-300 "
+                        className="p-2 rounded-xl bg-red-500 text-white hover:bg-red-400 border-2 border-gray-300"
                         value="Editar"
                     />
-
                 </form>
             </div>
-        </Suspense>
-    )
+        </>
+    );
 }
 
-export default EditarParams;
+export default EditarParamsWrapper;

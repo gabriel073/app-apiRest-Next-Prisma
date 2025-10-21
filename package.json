@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "postinstall": "prisma generate",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build"
   },
   "dependencies": {
     "@pnpm/exe": "^10.17.1",

@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import React from 'react'
 const { signOut } = require("next-auth/react")
 
 
 const cargarPosts = async () => {
-    const respuesta = await fetch('http://localhost:3000/posts');
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    const res = await fetch(`${baseUrl}/api/posts`, { cache: "no-store" });
     const data = await respuesta.json()
     return data;
 }
